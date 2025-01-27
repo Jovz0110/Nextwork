@@ -1,28 +1,23 @@
-name: Deploy to S3
+name: Upload Index.html to S3
 
 on:
   push:
     branches:
-      - main  # Trigger deployment on pushes to the main branch
+      - main  # Trigger workflow on pushes to the main branch
 
 jobs:
-  deploy:
+  upload-index:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Install AWS CLI
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y awscli
-
-    - name: Deploy to S3
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-        S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: |
-        aws s3 cp ./index.html s3://$S3_BUCKET/index.html
+      - name: Upload index.html to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        run: |
+          aws s3 cp ./my web.html s3://$S3_BUCKET/my web.html
