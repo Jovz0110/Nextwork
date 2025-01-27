@@ -20,4 +20,4 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
         run: |
-          aws s3 cp ./index.html s3://$S3_BUCKET/index.html
+          aws s3 cp ./index.html s3://nextwork-unique-bucket-nasol-0110/index.html
